@@ -8,7 +8,7 @@ public class PropelDec2021FedoraApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PropelDec2021FedoraApplication.class, args);
-		System.out.println("Welcome");
+		System.out.println("Welcome Megha!");
 	}
 
 }
