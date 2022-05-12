@@ -1,21 +1,16 @@
 package com.app.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import com.app.dto.AppointmentDTO;
 import com.app.entity.Appointment;
 
 public interface IAppointmentService {
+	
+	//List
+	public List<Appointment> getAppointments();
+	
+	//dto 
+	//public List<AppointmentDTO>getAllDTO();
 
-	//list appointment
-	public List<Appointment> getAppointmentList();
-	
-	//insert 
-	public void saveAppointment(Appointment appointment);
-	
-	//Search By Id
-	public Optional<Appointment> getAppointment(int id);
-	
-	//Delete
-	public void deleteAppointment(int id);
 }

@@ -1,12 +1,7 @@
 package com.app.entity;
 
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,222 +9,206 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
+import org.hibernate.annotations.CreationTimestamp;
 
-//import com.app.service.DatePrefixedSequenceIdGenerator;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "patient")
+@Table(name= "patient")
 public class Patient {
 	
-
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private int patient_id;
-	 
-	 
-	 @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patient_reg_no")
-	/* @GenericGenerator(
-	        name = "patient_reg_no", 
-	        strategy = "org.thoughts.on.java.generators.DatePrefixedSequenceIdGenerator", 
-	        parameters = {@Parameter(name = DatePrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50")})*/
-	 private String patient_reg_no;
-	 
-	 
-	 @Column(nullable = false)
-	 private String patient_name;
-	 
-	 private Date dob;
-	 
-	 private String gender;
-	 
-	 private String blood_group;
-	 
-	 private String phone_no;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int patientId;
 	
-	 private String email;
-	 
-	 private String address;
-	 
-	 private String is_active;
-	 
-	 private int user_id;
-	 @ManyToOne
-	 @JoinColumn(name = "user_id" , insertable = false, updatable = false)
-	 private Users user;
-	 
-	 private LocalDateTime created_on;
-	 
-	 @OneToMany(mappedBy="patient",cascade=CascadeType.ALL)
-	 private List<Appointment> appointment;
-	 
-	//default constructor
+	
+	private String fullName;
+	
+	private Date dob;
+	
+	
+	private String mobileno;
+	
+	
+	private String gender;
+	
+	private String bloodGroup;
+	
+	private String address;
+	
+	private String email;
+	
+	
+	private int staffId;
+	
+	
+	private String isActive;
+	
+	@ManyToOne
+	@JoinColumn(name="staffId", insertable = false, updatable = false)
+	private Staff staff;
+	
+	
+	@CreationTimestamp
+	@Column(name = "created_date")
+	private Date createdDate;
+
+
 	public Patient() {
 		super();
-			
 	}
-	
-	//parameterized constructor
-	public Patient(int patient_id, String patient_reg_no, String patient_name, Date dob, String gender,
-			String blood_group, String phone_no, String email, String address, String is_active, int user_id, Users user,
-			LocalDateTime created_on, List<Appointment> appointment) {
+
+
+	public Patient(int patientId, String fullName, Date dob, String mobileno, String gender, String bloodGroup,
+			String address, String email, int staffId, String isActive, Staff staff, Date createdDate) {
 		super();
-		this.patient_id = patient_id;
-		this.patient_reg_no = patient_reg_no;
-		this.patient_name = patient_name;
+		this.patientId = patientId;
+		this.fullName = fullName;
 		this.dob = dob;
+		this.mobileno = mobileno;
 		this.gender = gender;
-		this.blood_group = blood_group;
-		this.phone_no = phone_no;
-		this.email = email;
+		this.bloodGroup = bloodGroup;
 		this.address = address;
-		this.is_active = is_active;
-		this.user_id = user_id;
-		this.user = user;
-		this.created_on = created_on;
-		this.appointment = appointment;
+		this.email = email;
+		this.staffId = staffId;
+		this.isActive = isActive;
+		this.staff = staff;
+		this.createdDate = createdDate;
 	}
 
-	public int getPatient_id() {
-		return patient_id;
+
+	public int getPatientId() {
+		return patientId;
 	}
 
-	public void setPatient_id(int patient_id) {
-		this.patient_id = patient_id;
+
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
 	}
 
-	public String getPatient_reg_no() {
-		return patient_reg_no;
+
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setPatient_reg_no(String patient_reg_no) {
-		this.patient_reg_no = patient_reg_no;
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
-	public String getPatient_name() {
-		return patient_name;
-	}
-
-	public void setPatient_name(String patient_name) {
-		this.patient_name = patient_name;
-	}
 
 	public Date getDob() {
 		return dob;
 	}
 
+
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
+
+
+	public String getMobileno() {
+		return mobileno;
+	}
+
+
+	public void setMobileno(String mobileno) {
+		this.mobileno = mobileno;
+	}
+
 
 	public String getGender() {
 		return gender;
 	}
 
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
-	public String getBlood_group() {
-		return blood_group;
+
+	public String getBloodGroup() {
+		return bloodGroup;
 	}
 
-	public void setBlood_group(String blood_group) {
-		this.blood_group = blood_group;
+
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
 	}
 
-	public String getPhone_no() {
-		return phone_no;
-	}
-
-	public void setPhone_no(String phone_no) {
-		this.phone_no = phone_no;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getAddress() {
 		return address;
 	}
 
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	public String getIs_active() {
-		return is_active;
+
+	public String getEmail() {
+		return email;
 	}
 
-	public void setIs_active(String is_active) {
-		this.is_active = is_active;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public int getUser_id() {
-		return user_id;
+
+	public int getStaffId() {
+		return staffId;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
 	}
 
-	public Users getUser() {
-		return user;
+
+	public String getIsActive() {
+		return isActive;
 	}
 
-	public void setUser(Users user) {
-		this.user = user;
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
 	}
 
-	public LocalDateTime getCreated_on() {
-		return created_on;
+	@JsonBackReference
+	public Staff getStaff() {
+		return staff;
 	}
 
-	public void setCreated_on(LocalDateTime created_on) {
-		this.created_on = created_on;
+
+	public void setStaff(Staff staff) {
+		this.staff = staff;
 	}
 
-	public List<Appointment> getAppointment() {
-		return appointment;
+
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-	public void setAppointment(List<Appointment> appointment) {
-		this.appointment = appointment;
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Patient [patient_id=" + patient_id + ", patient_reg_no=" + patient_reg_no + ", patient_name="
-				+ patient_name + ", dob=" + dob + ", gender=" + gender + ", blood_group=" + blood_group + ", phone_no="
-				+ phone_no + ", email=" + email + ", address=" + address + ", is_active=" + is_active + ", user_id="
-				+ user_id + ", user=" + user + ", created_on=" + created_on + ", appointment=" + appointment + "]";
+		return "Patient [patientId=" + patientId + ", fullName=" + fullName + ", dob=" + dob + ", mobileno=" + mobileno
+				+ ", gender=" + gender + ", bloodGroup=" + bloodGroup + ", address=" + address + ", email=" + email
+				+ ", staffId=" + staffId + ", isActive=" + isActive + ", staff=" + staff + ", createdDate="
+				+ createdDate + "]";
 	}
 	
 	
 	
 	
-	
-	
 
-	
-	
-
-
-
-
-	
-
-
-
-
-	 
 }
