@@ -1,11 +1,10 @@
 package com.app.entity;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,172 +14,193 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name = "appointment")
-public class Appointment {
-	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private int appointment_id;
-	 
-	 private int patient_id;
-	 @ManyToOne
-	 @JoinColumn(name = "patient_id" , insertable = false, updatable = false)
-	 private Patient patient;
-	 
-	 private int doc_id;
-	 @ManyToOne
-	 @JoinColumn(name = "doc_id" , insertable = false, updatable = false)
-	 private Doctor doctor;
-	 
-	 private String token_no;
-	 
-	 
-	 private LocalDate appointment_date;
-	 
-	 private boolean is_active;
-	 
-	 private int user_id;
-	 @ManyToOne
-	 @JoinColumn(name = "user_id" , insertable = false, updatable = false)
-	 private Users user;
-	 
-	 private LocalDateTime created_on;
-	 
-	 @OneToMany(mappedBy="appointment",cascade=CascadeType.ALL)
-	 private List<ConsultationBill> consultation_bill;
-	 
-	public Appointment() {
-		super();
+	@Table(name= "appointment")
+	public class Appointment {
 		
-	}
-
-	public Appointment(int appointment_id, int patient_id, Patient patient, int doc_id, Doctor doctor, String token_no,
-			 LocalDate appointment_date, boolean is_active, int user_id, Users user,
-			LocalDateTime created_on, List<ConsultationBill> consultation_bill) {
-		super();
-		this.appointment_id = appointment_id;
-		this.patient_id = patient_id;
-		this.patient = patient;
-		this.doc_id = doc_id;
-		this.doctor = doctor;
-		this.token_no = token_no;
+		@Id
+		@GeneratedValue(strategy=GenerationType.IDENTITY)
+		private int appoinId;
 		
-		this.appointment_date = appointment_date;
-		this.is_active = is_active;
-		this.user_id = user_id;
-		this.user = user;
-		this.created_on = created_on;
-		this.consultation_bill = consultation_bill;
-	}
+		
+		private int patientId;
+		
+		
+		@ManyToOne
+		@JoinColumn(name="patientId", insertable = false, updatable = false)
+		private Patient  patient; 
+		
+		private String fullName;
+		
+		private String tokenNum;
+		
+		private int docId;
+		
+		@ManyToOne
+		@JoinColumn(name="docId", insertable = false, updatable = false)
+		private Doctor  doctor; 
+		
+		private Date doa;
+		
+		
+		private String isActive;
+		
+		
+		@CreationTimestamp
+		@Column(name = "created_date")
+		private Date createdDate;
 
-	public int getAppointment_id() {
-		return appointment_id;
-	}
+		@OneToMany(mappedBy="appointment",cascade=CascadeType.ALL)
+		List<LabTestPrescribed> labTestsPrescribed;
+		
+		
+		@OneToMany(mappedBy="appointment",cascade=CascadeType.ALL)
+		List<MedicinePrescribed> medicinePrescribed;
+		
+		@OneToMany(mappedBy="appointment",cascade=CascadeType.ALL)
+		List<Prescriptionnotes> prescriptionnotes;
 
-	public void setAppointment_id(int appointment_id) {
-		this.appointment_id = appointment_id;
-	}
+		public Appointment() {
+			super();
+		}
 
-	public int getPatient_id() {
-		return patient_id;
-	}
 
-	public void setPatient_id(int patient_id) {
-		this.patient_id = patient_id;
-	}
-	@JsonBackReference
-	public Patient getPatient() {
-		return patient;
-	}
+		public Appointment(int appoinId, int patientId, Patient patient,String fullName, String tokenNum, int docId, Doctor doctor,
+				Date doa, String isActive, Date createdDate) {
+			super();
+			this.appoinId = appoinId;
+			this.patientId = patientId;
+			this.patient = patient;
+			this.fullName=fullName;
+			this.tokenNum = tokenNum;
+			this.docId = docId;
+			this.doctor = doctor;
+			this.doa = doa;
+			this.isActive = isActive;
+			this.createdDate = createdDate;
+		}
 
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
 
-	public int getDoc_id() {
-		return doc_id;
-	}
+		public int getAppoinId() {
+			return appoinId;
+		}
 
-	public void setDoc_id(int doc_id) {
-		this.doc_id = doc_id;
-	}
-	@JsonBackReference
-	public Doctor getDoctor() {
-		return doctor;
-	}
 
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
-	}
+		public void setAppoinId(int appoinId) {
+			this.appoinId = appoinId;
+		}
 
-	public String getToken_no() {
-		return token_no;
-	}
 
-	public void setToken_no(String token_no) {
-		this.token_no = token_no;
-	}
+		public int getPatientId() {
+			return patientId;
+		}
 
-	
-	public LocalDate getAppointment_date() {
-		return appointment_date;
-	}
 
-	public void setAppointment_date(LocalDate appointment_date) {
-		this.appointment_date = appointment_date;
-	}
+		public void setPatientId(int patientId) {
+			this.patientId = patientId;
+		}
 
-	public boolean isIs_active() {
-		return is_active;
-	}
+		@JsonBackReference
+		public Patient getPatient() {
+			return patient;
+		}
 
-	public void setIs_active(boolean is_active) {
-		this.is_active = is_active;
-	}
 
-	public int getUser_id() {
-		return user_id;
-	}
+		public void setPatient(Patient patient) {
+			this.patient = patient;
+		}
+		
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
-	}
-	@JsonBackReference
-	public Users getUser() {
-		return user;
-	}
 
-	public void setUser(Users user) {
-		this.user = user;
-	}
+		public String getPatient_name() {
+			return fullName;
+		}
 
-	public LocalDateTime getCreated_on() {
-		return created_on;
-	}
 
-	public void setCreated_on(LocalDateTime created_on) {
-		this.created_on = created_on;
-	}
-	@JsonBackReference
-	public List<ConsultationBill> getConsultation_bill() {
-		return consultation_bill;
-	}
+		public void setPatient_name(String fullName) {
+			this.fullName = fullName;
+		}
 
-	public void setConsultation_bill(List<ConsultationBill> consultation_bill) {
-		this.consultation_bill = consultation_bill;
-	}
 
-	@Override
-	public String toString() {
-		return "Appointment [appointment_id=" + appointment_id + ", patient_id=" + patient_id + ", patient=" + patient
-				+ ", doc_id=" + doc_id + ", doctor=" + doctor + ", token_no=" + token_no +  ", appointment_date=" + appointment_date + ", is_active=" + is_active + ", user_id=" + user_id
-				+ ", user=" + user + ", created_on=" + created_on + ", consultation_bill=" + consultation_bill + "]";
-	}
+		public String getTokenNum() {
+			return tokenNum;
+		}
 
-	
 
-	
+		public void setTokenNum(String tokenNum) {
+			this.tokenNum = tokenNum;
+		}
+
+
+		public int getDocId() {
+			return docId;
+		}
+
+
+		public void setDocId(int docId) {
+			this.docId = docId;
+		}
+
+		@JsonBackReference
+		public Doctor getDoctor() {
+			return doctor;
+		}
+
+
+		public void setDoctor(Doctor doctor) {
+			this.doctor = doctor;
+		}
+
+
+		public Date getDoa() {
+			return doa;
+		}
+
+
+		public void setDoa(Date doa) {
+			this.doa = doa;
+		}
+
+
+		public String getIsActive() {
+			return isActive;
+		}
+
+
+		public void setIsActive(String isActive) {
+			this.isActive = isActive;
+		}
+
+
+		public Date getCreatedDate() {
+			return createdDate;
+		}
+
+
+		public void setCreatedDate(Date createdDate) {
+			this.createdDate = createdDate;
+		}
+
+
+		@Override
+		public String toString() {
+			return "Appointment [appoinId=" + appoinId + ", patientId=" + patientId + ", patient=" + patient
+					+ ", fullName=" + fullName + ", tokenNum=" + tokenNum + ", docId=" + docId + ", doctor=" + doctor
+					+ ", doa=" + doa + ", isActive=" + isActive + ", createdDate=" + createdDate
+					+ ", labTestsPrescribed=" + labTestsPrescribed + ", medicinePrescribed=" + medicinePrescribed
+					+ ", prescriptionnotes=" + prescriptionnotes + "]";
+		}
+
+
+		
+
+		
+		
+		
+
+
 }
