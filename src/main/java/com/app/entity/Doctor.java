@@ -1,9 +1,7 @@
 package com.app.entity;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,97 +9,92 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name="doctor")
+@Table(name= "doctor")
 public class Doctor {
-
-	//instance variable
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable=false,length=6)
-	private Integer doc_id;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int docId;
+	
+	
+	private int staffId;
 	
 	@OneToOne
-	@JoinColumn(name = "staff_id",insertable=false,updatable=false)
-	private Staff staff;
+	@JoinColumn(name="staffId", insertable = false, updatable = false)
+	private Staff  staff; 
 	
 	
-	private Integer staff_id;
+	private int specialiseId;
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "dept_id",insertable=false,updatable=false)
-	private Department department;
+	@JoinColumn(name="specialiseId", insertable = false, updatable = false)
+	private Specialization  specialization; 
+	
+	
+	private double consultationfee;
 	
 	
 	
-	private Integer dept_id;
+	private String isActive;
 	
-	@Column(nullable=false,length=50)
-	private String specalization;
 	
-	@Column(nullable=false,length=10)
-	private String consultation_fee;
-	
-	@Column(nullable=false)
-	private String is_active;
+	@CreationTimestamp
+	@Column(name = "created_date")
+	private Date createdDate;
 
-	@OneToMany(mappedBy="doctor",cascade=CascadeType.ALL)
-	private List<Appointment> appointment;
-	
-	 @OneToMany(mappedBy="doctor",cascade=CascadeType.ALL)
-	 private List<ConsultationBill> consultation_bill;
-	 
-	 /*
-	 @OneToMany(mappedBy="doctor",cascade=CascadeType.ALL)
-	 private List<Token> token;
-	 */
-	 
-	private LocalDate created_on;
-	
-	
-	//default constructor
+
 	public Doctor() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
-	public Doctor(Integer doc_id, Staff staff, Integer staff_id, Department department, Integer dept_id,
-			String specalization, String consultation_fee, String is_active, List<Appointment> appointment,
-			List<ConsultationBill> consultation_bill, LocalDate created_on) {
+	public Doctor(int docId, int staffId, Staff staff, int specialiseId, Specialization specialization,
+			double consultationfee, String isActive, Date createdDate) {
 		super();
-		this.doc_id = doc_id;
+		this.docId = docId;
+		this.staffId = staffId;
 		this.staff = staff;
-		this.staff_id = staff_id;
-		this.department = department;
-		this.dept_id = dept_id;
-		this.specalization = specalization;
-		this.consultation_fee = consultation_fee;
-		this.is_active = is_active;
-		this.appointment = appointment;
-		this.consultation_bill = consultation_bill;
-		this.created_on = created_on;
+		this.specialiseId = specialiseId;
+		this.specialization = specialization;
+		this.consultationfee = consultationfee;
+		this.isActive = isActive;
+		this.createdDate = createdDate;
 	}
 
 
-	public Integer getDoc_id() {
-		return doc_id;
+	public int getDocId() {
+		return docId;
 	}
 
 
-	public void setDoc_id(Integer doc_id) {
-		this.doc_id = doc_id;
+	public void setDocId(int docId) {
+		this.docId = docId;
 	}
 
 
+	public int getStaffId() {
+		return staffId;
+	}
+
+
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
+
+	@JsonBackReference
 	public Staff getStaff() {
 		return staff;
 	}
@@ -111,107 +104,69 @@ public class Doctor {
 		this.staff = staff;
 	}
 
-	@JsonBackReference
-	public Integer getStaff_id() {
-		return staff_id;
+
+	public int getSpecialiseId() {
+		return specialiseId;
 	}
 
 
-	public void setStaff_id(Integer staff_id) {
-		this.staff_id = staff_id;
-	}
-
-
-	public Department getDepartment() {
-		return department;
-	}
-
-
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setSpecialiseId(int specialiseId) {
+		this.specialiseId = specialiseId;
 	}
 
 	@JsonBackReference
-	public Integer getDept_id() {
-		return dept_id;
+	public Specialization getSpecialization() {
+		return specialization;
 	}
 
 
-	public void setDept_id(Integer dept_id) {
-		this.dept_id = dept_id;
+	public void setSpecialization(Specialization specialization) {
+		this.specialization = specialization;
 	}
 
 
-	public String getSpecalization() {
-		return specalization;
+	public double getConsultationfee() {
+		return consultationfee;
 	}
 
 
-	public void setSpecalization(String specalization) {
-		this.specalization = specalization;
+	public void setConsultationfee(double consultationfee) {
+		this.consultationfee = consultationfee;
 	}
 
 
-	public String getConsultation_fee() {
-		return consultation_fee;
+	public String getIsActive() {
+		return isActive;
 	}
 
 
-	public void setConsultation_fee(String consultation_fee) {
-		this.consultation_fee = consultation_fee;
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
 	}
 
 
-	public String getIs_active() {
-		return is_active;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
 
-	public void setIs_active(String is_active) {
-		this.is_active = is_active;
-	}
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
 
-
-	public List<Appointment> getAppointment() {
-		return appointment;
-	}
-
-
-	public void setAppointment(List<Appointment> appointment) {
-		this.appointment = appointment;
-	}
-
-
-	public List<ConsultationBill> getConsultation_bill() {
-		return consultation_bill;
-	}
-
-
-	public void setConsultation_bill(List<ConsultationBill> consultation_bill) {
-		this.consultation_bill = consultation_bill;
-	}
-
-
-	public LocalDate getCreated_on() {
-		return created_on;
-	}
-
-
-	public void setCreated_on(LocalDate created_on) {
-		this.created_on = created_on;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Doctor [doc_id=" + doc_id + ", staff=" + staff + ", staff_id=" + staff_id + ", department=" + department
-				+ ", dept_id=" + dept_id + ", specalization=" + specalization + ", consultation_fee=" + consultation_fee
-				+ ", is_active=" + is_active + ", appointment=" + appointment + ", consultation_bill="
-				+ consultation_bill + ", created_on=" + created_on + "]";
+
+		return "Doctor [docId=" + docId + ", staffId=" + staffId + ", staff=" + staff + ", specialiseId=" + specialiseId
+				+ ", specialization=" + specialization + ", consultationfee=" + consultationfee + ", isActive="
+				+ isActive + ", createdDate=" + createdDate + "]";
 	}
-
+	
+	
+	
 	
 
-	
-	
+
 }

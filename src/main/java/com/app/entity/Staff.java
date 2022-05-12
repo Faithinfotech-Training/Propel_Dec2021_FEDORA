@@ -1,234 +1,133 @@
 package com.app.entity;
 
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Table(name="staff")
 public class Staff {
 
-	//instance variable
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable=false,length=6)
-	private Integer staff_id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int staffId;
 	
 	
-	@OneToOne
-	@JoinColumn(name = "user_id",insertable=false,updatable=false)
-	private Users user;
+	private int userId;
 	
+	private String staffNo;
 	
-	private Integer user_id;
+	private String fullName;
 	
-	
-	@ManyToOne
-	@JoinColumn(name = "dept_id",insertable=false,updatable=false)
-	private Department department;
-	
-	
-	private Integer dept_id;
-	
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable=false,length=25)
-	private String staff_no;
-	
-	
-	@Column(nullable=false,length=40)
-	private String staff_name;
-	
-	
-	@Column(nullable=false,length=4)
-	private String gender;
-	
-	
-	@Column(nullable=false)
 	private Date dob;
 	
+	private String mobileno;
 	
-	@Column(nullable=false,length=30)
-	private String experience;
-	
-	
-	@Column(nullable=false,length=10)
-	private String phone_no;
-	
-	@Column(nullable=false,length=100)
-	private String email_id;
-	
-	
-	@Column(nullable=false,length=200)
 	private String address;
 	
-	
-	@Column(nullable=false)
 	private Date doj;
 	
-	
-	@Column(nullable=false,length=30)
 	private double salary;
 	
+	private String email;
 	
-	@Column(nullable=false)
-	private boolean is_active;
+	private String isActive;
+	
+	
+	@CreationTimestamp
+	@Column(name = "created_date")
+	private Date createdDate;
+	 
+	 
+	@OneToOne
+	@JoinColumn(name="userId", insertable = false, updatable = false)
+	private User user;
 
 
-	private LocalDate created_on;
-	
-	 @OneToMany(mappedBy="staff",cascade=CascadeType.ALL)
-	 private List<Patient> patient;
-	
-	 @OneToMany(mappedBy="staff",cascade=CascadeType.ALL)
-	 private List<Appointment> appointment;
-	 
-	 @OneToMany(mappedBy="staff",cascade=CascadeType.ALL)
-	 private List<Doctor> doctor;
-	 
-	 @OneToMany(mappedBy="staff",cascade=CascadeType.ALL)
-	 private List<ConsultationBill> consultancy_bill;
-	 
+
 	//default constructor
+
+
 	public Staff() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
-
+	
+	
 	//parametrized constructor
-	public Staff(Integer staff_id, Users user, Integer user_id, Department department, Integer dept_id, String staff_no,
-			String staff_name, String gender, Date dob, String experience, String phone_no, String email_id,
-			String address, Date doj, double salary, boolean is_active) {
+	public Staff(int staffId, int userId, String staffNo, String fullName, Date dob, String mobileno, String address,
+			Date doj, double salary, String email, String isActive, Date createdDate, User user) {
 		super();
-		this.staff_id = staff_id;
-		this.user = user;
-		this.user_id = user_id;
-		this.department = department;
-		this.dept_id = dept_id;
-		this.staff_no = staff_no;
-		this.staff_name = staff_name;
-		this.gender = gender;
+		this.staffId = staffId;
+		this.userId = userId;
+		this.staffNo = staffNo;
+		this.fullName = fullName;
 		this.dob = dob;
-		this.experience = experience;
-		this.phone_no = phone_no;
-		this.email_id = email_id;
+		this.mobileno = mobileno;
 		this.address = address;
 		this.doj = doj;
 		this.salary = salary;
-		this.is_active = is_active;
-	}
-
-
-	
-	//getter and setter
-	public Integer getStaff_id() {
-		return staff_id;
-	}
-
-
-
-	public void setStaff_id(Integer staff_id) {
-		this.staff_id = staff_id;
-	}
-
-
-
-	public Users getUser() {
-		return user;
-	}
-
-
-
-	public void setUser(Users user) {
+		this.email = email;
+		this.isActive = isActive;
+		this.createdDate = createdDate;
 		this.user = user;
 	}
 
 
 
-	public Integer getUser_id() {
-		return user_id;
+
+
+	public int getStaffId() {
+		return staffId;
 	}
 
 
-
-	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
 	}
 
 
-
-	public Department getDepartment() {
-		return department;
+	public int getUserId() {
+		return userId;
 	}
 
 
-
-	public void setDepartment(Department department) {
-		this.department = department;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 
-	@JsonBackReference
-	public Integer getDept_id() {
-		return dept_id;
+	public String getStaffNo() {
+		return staffNo;
 	}
 
 
-
-	public void setDept_id(Integer dept_id) {
-		this.dept_id = dept_id;
+	public void setStaffNo(String staffNo) {
+		this.staffNo = staffNo;
 	}
 
 
-
-	public String getStaff_no() {
-		return staff_no;
+	public String getFullName() {
+		return fullName;
 	}
 
 
-
-	public void setStaff_no(String staff_no) {
-		this.staff_no = staff_no;
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
-
-
-
-	public String getStaff_name() {
-		return staff_name;
-	}
-
-
-
-	public void setStaff_name(String staff_name) {
-		this.staff_name = staff_name;
-	}
-
-
-
-	public String getGender() {
-		return gender;
-	}
-
-
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
 
 
 	public Date getDob() {
@@ -236,47 +135,19 @@ public class Staff {
 	}
 
 
-
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
 
 
-
-	public String getExperience() {
-		return experience;
+	public String getMobileno() {
+		return mobileno;
 	}
 
 
-
-	public void setExperience(String experience) {
-		this.experience = experience;
+	public void setMobileno(String mobileno) {
+		this.mobileno = mobileno;
 	}
-
-
-
-	public String getPhone_no() {
-		return phone_no;
-	}
-
-
-
-	public void setPhone_no(String phone_no) {
-		this.phone_no = phone_no;
-	}
-
-
-
-	public String getEmail_id() {
-		return email_id;
-	}
-
-
-
-	public void setEmail_id(String email_id) {
-		this.email_id = email_id;
-	}
-
 
 
 	public String getAddress() {
@@ -284,11 +155,9 @@ public class Staff {
 	}
 
 
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 
 	public Date getDoj() {
@@ -296,11 +165,9 @@ public class Staff {
 	}
 
 
-
 	public void setDoj(Date doj) {
 		this.doj = doj;
 	}
-
 
 
 	public double getSalary() {
@@ -308,34 +175,61 @@ public class Staff {
 	}
 
 
-
 	public void setSalary(double salary) {
 		this.salary = salary;
 	}
 
 
-
-	public boolean isIs_active() {
-		return is_active;
+	public String getEmail() {
+		return email;
 	}
 
 
-
-	public void setIs_active(boolean is_active) {
-		this.is_active = is_active;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
+
+	public String getIsActive() {
+		return isActive;
+	}
+
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	@JsonBackReference
+	public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 
 	@Override
 	public String toString() {
-		return "Staff [staff_id=" + staff_id + ", user=" + user + ", user_id=" + user_id + ", department=" + department
-				+ ", dept_id=" + dept_id + ", staff_no=" + staff_no + ", staff_name=" + staff_name + ", gender="
-				+ gender + ", dob=" + dob + ", experience=" + experience + ", phone_no=" + phone_no + ", email_id="
-				+ email_id + ", address=" + address + ", doj=" + doj + ", salary=" + salary + ", is_active=" + is_active
-				+ "]";
+		return "Staff [staffId=" + staffId + ", userId=" + userId + ", staffNo=" + staffNo + ", fullName=" + fullName
+				+ ", dob=" + dob + ", mobileno=" + mobileno + ", address=" + address + ", doj=" + doj + ", salary="
+				+ salary + ", email=" + email + ", isActive=" + isActive + ", createdDate=" + createdDate + ", user="
+				+ user + "]";
 	}
-
-		
 	
+	
+	
+
+
 }

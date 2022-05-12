@@ -175,7 +175,9 @@ public class Patient {
 
 
 	public void setIsActive(String isActive) {
+
 		this.isActive = "y";
+
 	}
 
 	@JsonBackReference
