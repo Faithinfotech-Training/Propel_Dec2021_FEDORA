@@ -22,7 +22,7 @@ public interface IAppointmentService {
 	//Search By Id
     public Optional <Appointment> getAppointment(int id);
    
-    //Disable
+    //Disabled
     public void disableAppointment(int id);
     
     public List<PatientAppointmentDTO>findAllDTOAppoinment();

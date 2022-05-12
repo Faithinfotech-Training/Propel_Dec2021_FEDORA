@@ -32,7 +32,7 @@ public class PatientController {
 		return patientService.getPatient();
 	}
 	
-	//Get active Patients
+	//Get active Patients added
 	@GetMapping("/patients/active")
 	public List<Patient> getActivePatients() {
 		 

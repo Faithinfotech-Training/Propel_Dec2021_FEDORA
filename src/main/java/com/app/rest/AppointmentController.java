@@ -33,7 +33,7 @@ public class AppointmentController {
 		
 		return appointmentService.getAppointment();
 	}
-	//Get all 
+	//Get all added 
 	@GetMapping("/appointments")
 	public List<PatientAppointmentDTO> getAppointment() {
 		

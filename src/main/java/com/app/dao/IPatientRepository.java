@@ -3,6 +3,8 @@ package com.app.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,8 +20,9 @@ public interface IPatientRepository extends CrudRepository<Patient, Integer> {
 	@Query ("SELECT p FROM Patient p WHERE is_active='y' ")
 	public List <Patient> listActivePatients ();
 	
+	@Transactional
 	@Modifying
 	@Query ("UPDATE Patient SET is_active='n' WHERE patient_id=?1")
-	public Patient disablePatient (int id);
+	public void disablePatient (int id);
 }
 

@@ -5,10 +5,17 @@ import java.util.Date;
 
 public class PatientBillDTO {
 	
-	private int appointment_id;
-	private int patient_id;
-	private String patient_reg_no;
-	private String patient_name;
+	private int appoinId;
+	
+	private int patientId;
+	private String fullName;
+	
+	private String doctorName;
+	
+	private double consultationfee;
+	private String specialization;
+	private Date createdDate;
+	
 	
 	
 	
@@ -21,80 +28,142 @@ public class PatientBillDTO {
 
 
 
-	public PatientBillDTO(int appointment_id, int patient_id, String patient_reg_no, String patient_name) {
+
+	public PatientBillDTO(int appoinId, int patientId, String fullName, String doctorName, double consultationfee,
+			String specialization, Date createdDate) {
 		super();
-		this.appointment_id = appointment_id;
-		this.patient_id = patient_id;
-		this.patient_reg_no = patient_reg_no;
-		this.patient_name = patient_name;
+		this.appoinId = appoinId;
+		this.patientId = patientId;
+		this.fullName = fullName;
+		this.doctorName = doctorName;
+		this.consultationfee = consultationfee;
+		this.specialization = specialization;
+		this.createdDate = createdDate;
 	}
 
 
 
 
-	public int getAppointment_id() {
-		return appointment_id;
+
+	public int getAppoinId() {
+		return appoinId;
 	}
 
 
 
 
-	public void setAppointment_id(int appointment_id) {
-		this.appointment_id = appointment_id;
+
+	public void setAppoinId(int appoinId) {
+		this.appoinId = appoinId;
 	}
 
 
 
 
-	public int getPatient_id() {
-		return patient_id;
+
+	public int getPatientId() {
+		return patientId;
 	}
 
 
 
 
-	public void setPatient_id(int patient_id) {
-		this.patient_id = patient_id;
+
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
 	}
 
 
 
 
-	public String getPatient_reg_no() {
-		return patient_reg_no;
+
+	public String getFullName() {
+		return fullName;
 	}
 
 
 
 
-	public void setPatient_reg_no(String patient_reg_no) {
-		this.patient_reg_no = patient_reg_no;
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 
 
 
-	public String getPatient_name() {
-		return patient_name;
+
+	public String getDoctorName() {
+		return doctorName;
 	}
 
 
 
 
-	public void setPatient_name(String patient_name) {
-		this.patient_name = patient_name;
+
+	public void setDoctorName(String doctorName) {
+		this.doctorName = doctorName;
 	}
+
+
+
+
+
+	public double getConsultationfee() {
+		return consultationfee;
+	}
+
+
+
+
+
+	public void setConsultationfee(double consultationfee) {
+		this.consultationfee = consultationfee;
+	}
+
+
+
+
+
+	public String getSpecialization() {
+		return specialization;
+	}
+
+
+
+
+
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
+
+
+
+
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+
+
+
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
 
 
 
 
 	@Override
 	public String toString() {
-		return "PatientAppointmentDTO [appointment_id=" + appointment_id + ", patient_id=" + patient_id
-				+ ", patient_reg_no=" + patient_reg_no + ", patient_name=" + patient_name + "]";
+		return "PatientBillDTO [appoinId=" + appoinId + ", patientId=" + patientId + ", fullName=" + fullName
+				+ ", doctorName=" + doctorName + ", consultationfee=" + consultationfee + ", specialization="
+				+ specialization + ", createdDate=" + createdDate + "]";
 	}
 
 	
-	
-	
+
 }

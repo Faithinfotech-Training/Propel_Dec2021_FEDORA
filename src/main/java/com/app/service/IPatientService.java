@@ -19,7 +19,7 @@ public interface IPatientService {
 	//Search By Id
     public Optional <Patient> getPatient(int id);
     
-    //list active patients
+    //list active patientss
     public List<Patient>listActivePatients();
     
     //Disable

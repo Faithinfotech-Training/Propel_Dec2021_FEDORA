@@ -12,7 +12,7 @@ import com.app.dto.PatientAppointmentDTO;
 import com.app.dto.PatientBillDTO;
 import com.app.entity.Appointment;
 
-
+//changes from Arjun
 @Service
 public class AppointmentImplementation implements IAppointmentService {
 	
@@ -48,12 +48,16 @@ public class AppointmentImplementation implements IAppointmentService {
 		for (PatientAppointmentDTO appointment : appointmentList) {
 			PatientAppointmentDTO dto = new PatientAppointmentDTO();
 			
-			dto.setAppointment_id(appointment.getAppointment_id());
-			dto.setPatient_id(appointment.getPatient_id());
-			dto.setPatient_reg_no(appointment.getPatient_reg_no());
-			dto.setPatient_reg_no(appointment.getPatient_reg_no());
-			dto.setPatient_name(appointment.getPatient_name());
-			//dto.setStaff_name(appointment.getStaff_name());
+			dto.setAppoinId(appointment.getAppoinId());
+			dto.setDoa(appointment.getDoa());
+			dto.setPatientId(appointment.getPatientId());
+			dto.setFullName(appointment.getFullName());
+			dto.setGender(appointment.getGender());
+			dto.setBloodGroup(appointment.getBloodGroup());
+			dto.setTokenNum(appointment.getTokenNum());
+			dto.setSpecialization(appointment.getSpecialization());
+			dto.setDoctorName(appointment.getDoctorName());
+			
 			 
 			appointmentDtolist.add(dto);
 		}
@@ -69,13 +73,16 @@ public class AppointmentImplementation implements IAppointmentService {
 		for (PatientBillDTO bill : billList) {
 			PatientBillDTO bdto = new PatientBillDTO();
 			
-			bdto.setAppointment_id(bill.getAppointment_id());
-			bdto.setPatient_id(bill.getPatient_id());
-			bdto.setPatient_reg_no(bill.getPatient_reg_no());
-			bdto.setPatient_name(bill.getPatient_name());
-			//bdto.setConsultancy_fee(bill.getConsultancy_fee());
-			//bdto.setAppointment_date(bill.getAppointment_date());
 			
+			bdto.setAppoinId(bill.getAppoinId());
+			bdto.setPatientId(bill.getPatientId());
+			bdto.setFullName(bill.getFullName());
+			bdto.setDoctorName(bill.getDoctorName());
+			bdto.setConsultationfee(bill.getConsultationfee());
+			bdto.setSpecialization(bill.getSpecialization());
+			bdto.setCreatedDate(bill.getCreatedDate());
+			
+		
 			billDtolist.add(bdto);
 		}
 		return billDtolist;	
