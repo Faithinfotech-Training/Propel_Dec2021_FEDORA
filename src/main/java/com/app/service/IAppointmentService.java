@@ -1,16 +1,33 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import com.app.dto.AppointmentDTO;
+import org.springframework.stereotype.Service;
+
+import com.app.dto.PatientAppointmentDTO;
+import com.app.dto.PatientBillDTO;
 import com.app.entity.Appointment;
+import com.app.entity.Patient;
 
+@Service
 public interface IAppointmentService {
-	
+
 	//List
-	public List<Appointment> getAppointments();
+	public List<Appointment>getAppointment();
 	
-	//dto 
-	//public List<AppointmentDTO>getAllDTO();
+	//Insert/Update
+	public void saveAppointment(Appointment appointment);
+	
+	//Search By Id
+    public Optional <Appointment> getAppointment(int id);
+   
+    //Disabled
+    public void disableAppointment(int id);
+    
+    public List<PatientAppointmentDTO>findAllDTOAppoinment();
+    
+    public List<PatientBillDTO>findAllDTOBill();
+			   
 
 }

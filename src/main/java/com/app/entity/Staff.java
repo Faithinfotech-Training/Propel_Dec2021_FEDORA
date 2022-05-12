@@ -56,9 +56,38 @@ public class Staff {
 	private User user;
 
 
+
+	//default constructor
+
+
 	public Staff() {
 		super();
 	}
+
+
+	
+	
+	//parametrized constructor
+	public Staff(int staffId, int userId, String staffNo, String fullName, Date dob, String mobileno, String address,
+			Date doj, double salary, String email, String isActive, Date createdDate, User user) {
+		super();
+		this.staffId = staffId;
+		this.userId = userId;
+		this.staffNo = staffNo;
+		this.fullName = fullName;
+		this.dob = dob;
+		this.mobileno = mobileno;
+		this.address = address;
+		this.doj = doj;
+		this.salary = salary;
+		this.email = email;
+		this.isActive = isActive;
+		this.createdDate = createdDate;
+		this.user = user;
+	}
+
+
+
 
 
 	public int getStaffId() {
@@ -201,4 +230,6 @@ public class Staff {
 	
 	
 	
+
+
 }

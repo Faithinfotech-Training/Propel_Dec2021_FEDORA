@@ -9,8 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -148,11 +152,13 @@ public class Doctor {
 
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
+
 	}
 
 
 	@Override
 	public String toString() {
+
 		return "Doctor [docId=" + docId + ", staffId=" + staffId + ", staff=" + staff + ", specialiseId=" + specialiseId
 				+ ", specialization=" + specialization + ", consultationfee=" + consultationfee + ", isActive="
 				+ isActive + ", createdDate=" + createdDate + "]";
@@ -161,5 +167,6 @@ public class Doctor {
 	
 	
 	
+
 
 }
