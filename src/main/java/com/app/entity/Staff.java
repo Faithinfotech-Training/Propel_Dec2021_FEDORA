@@ -56,10 +56,14 @@ public class Staff {
 	private User user;
 
 
+
 	//default constructor
+
+
 	public Staff() {
 		super();
 	}
+
 
 	
 	
@@ -81,6 +85,7 @@ public class Staff {
 		this.createdDate = createdDate;
 		this.user = user;
 	}
+
 
 
 
@@ -225,4 +230,7 @@ public class Staff {
 	
 	
 	
+
+
 }
+

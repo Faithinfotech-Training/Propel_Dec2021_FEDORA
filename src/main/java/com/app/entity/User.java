@@ -121,8 +121,5 @@ public class User {
 				+ ", createdDate=" + createdDate + ", isActive=" + isActive + ", role=" + role + "]";
 	}
 
-	
-
-	
-	
 }
+
