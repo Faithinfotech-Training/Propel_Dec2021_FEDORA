@@ -172,11 +172,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 		public void setIsActive(String isActive) {
-
 			this.isActive = "y";
-
-			//this.isActive = isActive;
-
 		}
 
 

@@ -1,21 +1,15 @@
 package com.app.entity;
-
+import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name= "labtest")
@@ -35,21 +29,13 @@ public class LabTest {
 	
 	private double lowRange;
 	
-	
+	private String unit;
 	private String isActive;
 	
 	
-	
-	@OneToMany(mappedBy="labTest",cascade=CascadeType.ALL)
-	List<LabTestPrescribed> labTestsPrescribed;
-	
-	
-	@OneToMany(mappedBy="labTest",cascade=CascadeType.ALL)
-	List<TestReport> testReport;
-	
 	@CreationTimestamp
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDate createdDate;
 
 
 	public LabTest() {
@@ -58,8 +44,7 @@ public class LabTest {
 
 
 	public LabTest(int labtestId, String testCode, String testName, double price, double highRange, double lowRange,
-			String isActive, List<LabTestPrescribed> labTestsPrescribed, List<TestReport> testReport,
-			Date createdDate) {
+			String unit, String isActive, LocalDate createdDate) {
 		super();
 		this.labtestId = labtestId;
 		this.testCode = testCode;
@@ -67,10 +52,22 @@ public class LabTest {
 		this.price = price;
 		this.highRange = highRange;
 		this.lowRange = lowRange;
+		this.unit = unit;
 		this.isActive = isActive;
-		this.labTestsPrescribed = labTestsPrescribed;
-		this.testReport = testReport;
 		this.createdDate = createdDate;
+	}
+
+
+
+	
+
+	public String getUnit() {
+		return unit;
+	}
+
+
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 
@@ -144,32 +141,12 @@ public class LabTest {
 	}
 
 
-	public List<LabTestPrescribed> getLabTestsPrescribed() {
-		return labTestsPrescribed;
-	}
-
-	@JsonBackReference
-	public void setLabTestsPrescribed(List<LabTestPrescribed> labTestsPrescribed) {
-		this.labTestsPrescribed = labTestsPrescribed;
-	}
-
-
-	public List<TestReport> getTestReport() {
-		return testReport;
-	}
-
-	@JsonBackReference
-	public void setTestReport(List<TestReport> testReport) {
-		this.testReport = testReport;
-	}
-
-
-	public Date getCreatedDate() {
+	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
 
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(LocalDate createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -177,17 +154,13 @@ public class LabTest {
 	@Override
 	public String toString() {
 		return "LabTest [labtestId=" + labtestId + ", testCode=" + testCode + ", testName=" + testName + ", price="
-				+ price + ", highRange=" + highRange + ", lowRange=" + lowRange + ", isActive=" + isActive
-				+ ", labTestsPrescribed=" + labTestsPrescribed + ", testReport=" + testReport + ", createdDate="
-				+ createdDate + "]";
+				+ price + ", highRange=" + highRange + ", lowRange=" + lowRange + ", unit=" + unit + ", isActive="
+				+ isActive + ", createdDate=" + createdDate + "]";
 	}
-
-
-
-	
 	
 	
 	
 	
 	
 }
+
