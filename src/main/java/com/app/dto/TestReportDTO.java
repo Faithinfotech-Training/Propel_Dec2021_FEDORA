@@ -2,6 +2,7 @@ package com.app.dto;
 
 public class TestReportDTO {
 
+
 	private int appoinId;
 	private int patientId;
 	private String patientName;

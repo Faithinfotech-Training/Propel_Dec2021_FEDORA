@@ -9,9 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import javax.persistence.OneToOne;
-
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,23 +16,26 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name= "labtestPrescribed")
-public class LabTestPrescribed {
+@Table(name= "medicinePrescribed")
+public class MedicinePrescribed {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int labtestprescribeId;
+	private int medprescribeId;
 	
 	
-	private int labtestId;
-	
+	private int medicineId;
 	
 	@ManyToOne
-	@JoinColumn(name="labtestId", insertable = false, updatable = false)
-	private LabTest  labTest; 
+	@JoinColumn(name="medicineId", insertable = false, updatable = false)
+	private Medicine  medicine; 
+	
+	private String dosage;
+	
+	private String course;
+	
 	
 	private int appoinId;
-	
 	
 	@ManyToOne
 	@JoinColumn(name="appoinId", insertable = false, updatable = false)
@@ -50,17 +50,19 @@ public class LabTestPrescribed {
 	private Date createdDate;
 
 
-	public LabTestPrescribed() {
+	public MedicinePrescribed() {
 		super();
 	}
 
 
-	public LabTestPrescribed(int labtestprescribeId, int labtestId, LabTest labTest, int appoinId,
-			Appointment appointment, String isActive, Date createdDate) {
+	public MedicinePrescribed(int medprescribeId, int medicineId, Medicine medicine, String dosage, String course,
+			int appoinId, Appointment appointment, String isActive, Date createdDate) {
 		super();
-		this.labtestprescribeId = labtestprescribeId;
-		this.labtestId = labtestId;
-		this.labTest = labTest;
+		this.medprescribeId = medprescribeId;
+		this.medicineId = medicineId;
+		this.medicine = medicine;
+		this.dosage = dosage;
+		this.course = course;
 		this.appoinId = appoinId;
 		this.appointment = appointment;
 		this.isActive = isActive;
@@ -68,33 +70,53 @@ public class LabTestPrescribed {
 	}
 
 
-	public int getLabtestprescribeId() {
-		return labtestprescribeId;
+	public int getMedprescribeId() {
+		return medprescribeId;
 	}
 
 
-	public void setLabtestprescribeId(int labtestprescribeId) {
-		this.labtestprescribeId = labtestprescribeId;
+	public void setMedprescribeId(int medprescribeId) {
+		this.medprescribeId = medprescribeId;
 	}
 
 
-	public int getLabtestId() {
-		return labtestId;
+	public int getMedicineId() {
+		return medicineId;
 	}
 
 
-	public void setLabtestId(int labtestId) {
-		this.labtestId = labtestId;
+	public void setMedicineId(int medicineId) {
+		this.medicineId = medicineId;
 	}
 
 	@JsonBackReference
-	public LabTest getLabTest() {
-		return labTest;
+	public Medicine getMedicine() {
+		return medicine;
 	}
 
 
-	public void setLabTest(LabTest labTest) {
-		this.labTest = labTest;
+	public void setMedicine(Medicine medicine) {
+		this.medicine = medicine;
+	}
+
+
+	public String getDosage() {
+		return dosage;
+	}
+
+
+	public void setDosage(String dosage) {
+		this.dosage = dosage;
+	}
+
+
+	public String getCourse() {
+		return course;
+	}
+
+
+	public void setCourse(String course) {
+		this.course = course;
 	}
 
 
@@ -140,15 +162,10 @@ public class LabTestPrescribed {
 
 	@Override
 	public String toString() {
-		return "LabTestPrescribed [labtestprescribeId=" + labtestprescribeId + ", labtestId=" + labtestId + ", labTest="
-				+ labTest + ", appoinId=" + appoinId + ", appointment=" + appointment + ", isActive=" + isActive
-				+ ", createdDate=" + createdDate + "]";
+		return "MedicinePrescribed [medprescribeId=" + medprescribeId + ", medicineId=" + medicineId + ", medicine="
+				+ medicine + ", dosage=" + dosage + ", course=" + course + ", appoinId=" + appoinId + ", appointment="
+				+ appointment + ", isActive=" + isActive + ", createdDate=" + createdDate + "]";
 	}
-
 	
 	
-	
-
-
 }
-

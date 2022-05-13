@@ -9,9 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import javax.persistence.OneToOne;
-
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,23 +16,17 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-@Table(name= "labtestPrescribed")
-public class LabTestPrescribed {
+@Table(name= "prescriptionnotes")
+public class Prescriptionnotes {
+	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int labtestprescribeId;
+	private int notesId;
 	
-	
-	private int labtestId;
-	
-	
-	@ManyToOne
-	@JoinColumn(name="labtestId", insertable = false, updatable = false)
-	private LabTest  labTest; 
+	private String notes;
 	
 	private int appoinId;
-	
 	
 	@ManyToOne
 	@JoinColumn(name="appoinId", insertable = false, updatable = false)
@@ -50,17 +41,16 @@ public class LabTestPrescribed {
 	private Date createdDate;
 
 
-	public LabTestPrescribed() {
+	public Prescriptionnotes() {
 		super();
 	}
 
 
-	public LabTestPrescribed(int labtestprescribeId, int labtestId, LabTest labTest, int appoinId,
-			Appointment appointment, String isActive, Date createdDate) {
+	public Prescriptionnotes(int notesId, String notes, int appoinId, Appointment appointment, String isActive,
+			Date createdDate) {
 		super();
-		this.labtestprescribeId = labtestprescribeId;
-		this.labtestId = labtestId;
-		this.labTest = labTest;
+		this.notesId = notesId;
+		this.notes = notes;
 		this.appoinId = appoinId;
 		this.appointment = appointment;
 		this.isActive = isActive;
@@ -68,33 +58,23 @@ public class LabTestPrescribed {
 	}
 
 
-	public int getLabtestprescribeId() {
-		return labtestprescribeId;
+	public int getNotesId() {
+		return notesId;
 	}
 
 
-	public void setLabtestprescribeId(int labtestprescribeId) {
-		this.labtestprescribeId = labtestprescribeId;
+	public void setNotesId(int notesId) {
+		this.notesId = notesId;
 	}
 
 
-	public int getLabtestId() {
-		return labtestId;
+	public String getNotes() {
+		return notes;
 	}
 
 
-	public void setLabtestId(int labtestId) {
-		this.labtestId = labtestId;
-	}
-
-	@JsonBackReference
-	public LabTest getLabTest() {
-		return labTest;
-	}
-
-
-	public void setLabTest(LabTest labTest) {
-		this.labTest = labTest;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 
@@ -140,15 +120,10 @@ public class LabTestPrescribed {
 
 	@Override
 	public String toString() {
-		return "LabTestPrescribed [labtestprescribeId=" + labtestprescribeId + ", labtestId=" + labtestId + ", labTest="
-				+ labTest + ", appoinId=" + appoinId + ", appointment=" + appointment + ", isActive=" + isActive
-				+ ", createdDate=" + createdDate + "]";
+		return "Prescriptionnotes [notesId=" + notesId + ", notes=" + notes + ", appoinId=" + appoinId
+				+ ", appointment=" + appointment + ", isActive=" + isActive + ", createdDate=" + createdDate + "]";
 	}
-
 	
 	
-	
-
 
 }
-
